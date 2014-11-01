@@ -8,8 +8,14 @@ namespace Engine
 {
     public class Circle
     {
+        /// <summary>
+        /// Radius of the circle
+        /// </summary>
         private float radius;
 
+        /// <summary>
+        /// Center point of the circle
+        /// </summary>
         private Vector2 center;
 
         public Circle()
@@ -17,18 +23,32 @@ namespace Engine
 
         }
 
+        /// <summary>
+        /// Creates a copy of given circle
+        /// </summary>
+        /// <param name="toCopy">Circle to copy radius and center of</param>
         public Circle(Circle toCopy)
         {
             this.radius = toCopy.radius;
             this.center = toCopy.center;
         }
 
+        /// <summary>
+        /// Creates a new circle from given radius and center point
+        /// </summary>
+        /// <param name="radius">Radius of the circle</param>
+        /// <param name="center">Center point of the circle</param>
         public Circle(float radius, Vector2 center)
         {
             this.radius = radius;
             this.center = center;
         }
 
+        /// <summary>
+        /// Whether this is overlapping the given circle or not
+        /// </summary>
+        /// <param name="other">The circle to check intersection with</param>
+        /// <returns>Whether it is intersecting or not</returns>
         public bool Intersects(Circle other)
         {
             Vector2 distance = other.Center - this.center;
@@ -39,6 +59,11 @@ namespace Engine
             return distance.LengthSquared() < this.radius * this.radius;
         }
 
+        /// <summary>
+        /// Whether this is overlapping the given rectangle or not
+        /// </summary>
+        /// <param name="other">The rectangle to check intersection with</param>
+        /// <returns></returns>
         public bool Intersects(Rectangle other)
         {
             Vector2 distance = new Vector2(this.center.X - MathHelper.Clamp((int) this.center.X, other.Left, other.Right), 

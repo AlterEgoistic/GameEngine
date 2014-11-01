@@ -10,14 +10,23 @@ namespace Engine
 {
     public class Animation : SpriteSheet
     {
-        private bool isLooping;
+        /// <summary>
+        /// Whether the animation should play again after reaching the last frame
+        /// </summary>
+        private bool loop;
 
+        /// <summary>
+        /// The time each frame is displayed
+        /// </summary>
         private float frametime;
 
+        /// <summary>
+        /// The time passed since the last frame was displayed
+        /// </summary>
         private float elapsedTime;
 
         /// <summary>
-        /// 
+        /// Creates a new animation
         /// </summary>
         /// <param name="assetName">Name of the spritesheet to use</param>
         /// <param name="sheetRows">The amount of rows the spritesheet has</param>
@@ -28,11 +37,11 @@ namespace Engine
             : base(assetName, sheetRows, sheetColumns)
         {
             this.frametime = frametime;
-            this.isLooping = isLooping;
+            this.loop = isLooping;
         }
 
         /// <summary>
-        /// 
+        /// Creates a new animation
         /// </summary>
         /// <param name="assetName">Name of the spritesheet to use</param>
         /// <param name="sheetRows">The amount of rows the spritesheet has</param>
@@ -45,7 +54,7 @@ namespace Engine
             : base(assetName, sheetRows, sheetColumns, startingSheetIndex, endingSheetIndex)
         {
             this.frametime = frametime;
-            this.isLooping = isLooping;
+            this.loop = isLooping;
         }
 
         /// <summary>
@@ -65,7 +74,7 @@ namespace Engine
                 while(this.elapsedTime >= this.frametime)
                 {
                     this.elapsedTime -= this.frametime;
-                    if(this.isLooping)
+                    if(this.loop)
                     {
                         this.SheetIndex = (this.SheetIndex + 1) % this.SheetElements;
                     }
@@ -78,11 +87,15 @@ namespace Engine
             base.Update(gameTime);
         }
 
+        /// <summary>
+        /// If the animation has reached the last frame
+        /// Note: Only works when animation is not set to looping
+        /// </summary>
         public bool AnimationEnded
         {
             get
             {
-                if(!this.isLooping)
+                if(!this.loop)
                 {
                     return this.SheetIndex >= (this.SheetElements - 1);
                 }
@@ -92,7 +105,7 @@ namespace Engine
 
         public bool IsLooping
         {
-            get { return this.isLooping; }
+            get { return this.loop; }
         }
 
     }

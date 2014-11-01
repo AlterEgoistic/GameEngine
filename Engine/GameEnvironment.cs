@@ -26,10 +26,11 @@ namespace Engine
 
         private static bool pauseInput;
 
-        protected GameEnvironment()
+        public GameEnvironment()
         {
             this.graphics = new GraphicsDeviceManager(this);
             GameEnvironment.pauseInput = false;
+            this.Content.RootDirectory = "Content";
         }
 
         /// <summary>
@@ -47,7 +48,8 @@ namespace Engine
 
             GameEnvironment.assetManager = new AssetManager(this.Content);
             GameEnvironment.gameStateManager = new GameStateManager();
-            GameEnvironment.screen = new Point(0, 0);
+            GameEnvironment.screen = new Point(GraphicsDevice.PresentationParameters.BackBufferWidth, GraphicsDevice.PresentationParameters.BackBufferHeight);
+
             GameEnvironment.camera = new Camera();
         }
 
@@ -77,8 +79,16 @@ namespace Engine
         protected override void Update(GameTime gameTime)
         {
             this.HandleInput();
-            gameStateManager.Update(gameTime);
-            camera.Update(gameTime); 
+            GameEnvironment.gameStateManager.Update(gameTime);
+            if(GameEnvironment.gameStateManager.CurrentWorld != GameEnvironment.screen)
+            {
+                GameEnvironment.camera.IsDisabled = false;
+                GameEnvironment.camera.Update(gameTime);
+            }
+            else
+            {
+                GameEnvironment.camera.IsDisabled = true; 
+            }
             base.Update(gameTime);
         }
 
@@ -99,7 +109,6 @@ namespace Engine
         {
              this.inputHelper.Update();
              GameEnvironment.gameStateManager.HandleInput(this.inputHelper);
-            
         }
 
         public static AssetManager AssetManager

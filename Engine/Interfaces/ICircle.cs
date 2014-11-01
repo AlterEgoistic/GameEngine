@@ -7,7 +7,10 @@ namespace Engine
 {
     public interface ICircle
     {
-        public Circle BoundingCircle
+        /// <summary>
+        /// The circle that is used to check collision with
+        /// </summary>
+        Circle BoundingCircle
         {
             get;
             set;

@@ -8,7 +8,10 @@ namespace Engine
 {
     public interface IRectangle
     {
-        public Rectangle BoundingBox
+        /// <summary>
+        /// The Rectangle that is used to check collision with
+        /// </summary>
+        Rectangle BoundingBox
         {
             get;
             set;

@@ -11,11 +11,20 @@ namespace Engine
 {
     public class AnimatedGameObject : GameObject
     {
+        /// <summary>
+        /// Whether the current animation should be horizontally mirrored
+        /// </summary>
+        protected bool mirror;
+
+        /// <summary>
+        /// The animation that is currently being played
+        /// </summary>
         private Animation currentAnimation;
 
+        /// <summary>
+        /// The set of animations that can be played
+        /// </summary>
         private Dictionary<String, Animation> animations;
-
-        private bool mirror; 
 
         /// <summary>
         /// A GameObject using one or several animation(s) 
@@ -81,7 +90,7 @@ namespace Engine
         /// <summary>
         /// Plays an animation that is already loaded
         /// </summary>
-        /// <param name="idInDictionary"></param>
+        /// <param name="idInDictionary">The name of the </param>
         public void PlayAnimation(String idInDictionary)
         {
             if(animations[idInDictionary] == this.currentAnimation)
@@ -98,7 +107,7 @@ namespace Engine
 
         public override void Update(GameTime gameTime)
         {
-            if(this.currentAnimation != null && this.isVisible)
+            if(this.currentAnimation != null && (this.isInView || this.alwaysAnimate) && this.isVisible)
             {
                 this.currentAnimation.Update(gameTime);
                 this.currentAnimation.Mirror = mirror; 
@@ -108,7 +117,7 @@ namespace Engine
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-            if(this.currentAnimation != null && this.isVisible)
+            if(this.currentAnimation != null && this.isInView && this.isVisible)
             {
                 this.currentAnimation.Draw(spriteBatch, this.position);
             }
@@ -125,7 +134,7 @@ namespace Engine
                 }
                 else
                 {
-                    return base.Width;
+                    return 0;
                 }
             }
         }
@@ -138,10 +147,19 @@ namespace Engine
                 {
                     return this.currentAnimation.Height;
                 }
-                else
+                return 0;
+            }
+        }
+
+        public override Vector2 Center
+        {
+            get 
+            {
+                if(this.currentAnimation != null)
                 {
-                    return base.Height;
+                    return this.currentAnimation.Center;
                 }
+                return Vector2.Zero;
             }
         }
 
@@ -151,6 +169,9 @@ namespace Engine
             set { this.mirror = value; }
         }
 
-        
+        public Animation CurrentAnimation
+        {
+            get { return this.currentAnimation; }
+        }
     }
 }
