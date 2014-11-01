@@ -80,6 +80,10 @@ namespace Engine
             return this.currentMouseState.LeftButton == ButtonState.Pressed && this.previousMouseState.LeftButton == ButtonState.Released;
         }
 
+        /// <summary>
+        /// Whether the left mouse button is being held
+        /// </summary>
+        /// <returns>If the user is holding it or not</returns>
         public bool LeftMouseHold()
         {
             return this.currentMouseState.LeftButton == ButtonState.Pressed && this.previousMouseState.LeftButton == ButtonState.Pressed;
@@ -95,7 +99,7 @@ namespace Engine
         }
 
         /// <summary>
-        /// Whether the right mouse is being hold
+        /// Whether the right mouse button is being held
         /// </summary>
         /// <returns>Whether the user is holding the right mouse button or not</returns>
         public bool RightMouseHold()
@@ -130,6 +134,28 @@ namespace Engine
             set { Mouse.SetPosition((int) value.X, (int) value.Y); }
         }
 
+        public Keys[] GetPressedKeys()
+        {
+            List<Keys> pressed = new List<Keys>();
+            for(int i = 0; i < this.currentKeyboardstate.GetPressedKeys().Length; i++)
+            {
+                if(this.IsKeyPressed(this.currentKeyboardstate.GetPressedKeys()[i]))
+                {
+                    pressed.Add(this.currentKeyboardstate.GetPressedKeys()[i]);
+                }
+            }
+            return pressed.ToArray();
+        }
+
+        public Keys[] GetHeldKeys()
+        {
+            return this.currentKeyboardstate.GetPressedKeys();
+        }
+
+        /// <summary>
+        /// Gets the value of the scrollwhee
+        /// Positive value means more scrolled up than down
+        /// </summary>
         public int ScrollWheelValue
         {
             get { return this.currentMouseState.ScrollWheelValue; }
