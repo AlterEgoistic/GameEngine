@@ -57,7 +57,7 @@ namespace Engine
         /// <param name="spriteBatch">The spritebatch to draw it on/with</param>
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-            if(this.isVisible && this.text != null && this.isInView)
+            if(this.isVisible && this.isInView)
             {
                 spriteBatch.DrawString(this.font, this.text, this.position, this.textColor);
                 base.Draw(gameTime, spriteBatch);

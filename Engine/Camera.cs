@@ -16,6 +16,8 @@ namespace Engine
 
         private Vector3 velocity;
 
+        private bool isDisabled;
+
         public Camera()
         {
             this.focusPoint = Vector3.Zero;
@@ -46,8 +48,12 @@ namespace Engine
 
         public bool IsInView(GameObject gameObj)
         {
-             Rectangle currentView = new Rectangle((int) -this.view.Translation.X, (int) -this.view.Translation.Y, GameEnvironment.Screen.X, GameEnvironment.Screen.Y);
-             return gameObj.DrawingBox.Intersects(currentView);           
+            if(this.isDisabled)
+            {
+                return true; 
+            }
+            Rectangle currentView = new Rectangle((int) -this.view.Translation.X, (int) -this.view.Translation.Y, GameEnvironment.Screen.X, GameEnvironment.Screen.Y);
+            return gameObj.DrawingBox.Intersects(currentView);           
         }
 
         public Vector2 ViewToWorld(Vector2 viewPosition)
@@ -77,6 +83,12 @@ namespace Engine
                 this.velocity.X = value.X;
                 this.velocity.Y = value.Y; 
             }
+        }
+
+        public bool IsDisabled
+        {
+            get { return this.isDisabled; }
+            set { this.isDisabled = value; }
         }
 
     }

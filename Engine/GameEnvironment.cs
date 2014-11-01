@@ -30,6 +30,7 @@ namespace Engine
         {
             this.graphics = new GraphicsDeviceManager(this);
             GameEnvironment.pauseInput = false;
+            this.Content.RootDirectory = "Content";
         }
 
         /// <summary>
@@ -78,10 +79,15 @@ namespace Engine
         protected override void Update(GameTime gameTime)
         {
             this.HandleInput();
-            gameStateManager.Update(gameTime);
+            GameEnvironment.gameStateManager.Update(gameTime);
             if(GameEnvironment.gameStateManager.CurrentWorld != GameEnvironment.screen)
             {
-                camera.Update(gameTime);
+                GameEnvironment.camera.IsDisabled = true;
+                GameEnvironment.camera.Update(gameTime);
+            }
+            else
+            {
+                GameEnvironment.camera.IsDisabled = true; 
             }
             base.Update(gameTime);
         }
