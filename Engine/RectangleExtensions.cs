@@ -8,6 +8,11 @@ namespace Engine
 {
     public static class RectangleExtensions
     {
+        /// <summary>
+        /// Whether this is overlapping the given circle or not
+        /// </summary>
+        /// <param name="other">The circle to check intersection with</param>
+        /// <returns>Whether it is intersecting or not</returns>
         public static bool Intersects(this Rectangle self, Circle other)
         {
             Vector2 distance = new Vector2(other.Center.X - MathHelper.Clamp((int) other.Center.X, self.Left, self.Right),
