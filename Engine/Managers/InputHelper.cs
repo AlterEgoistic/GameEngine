@@ -84,7 +84,7 @@ namespace Engine
         /// Whether the left mouse button is being held
         /// </summary>
         /// <returns>If the user is holding it or not</returns>
-        public bool LeftMouseHold()
+        public bool LeftMouseHeld()
         {
             return this.currentMouseState.LeftButton == ButtonState.Pressed && this.previousMouseState.LeftButton == ButtonState.Pressed;
         }
@@ -102,9 +102,27 @@ namespace Engine
         /// Whether the right mouse button is being held
         /// </summary>
         /// <returns>Whether the user is holding the right mouse button or not</returns>
-        public bool RightMouseHold()
+        public bool RightMouseHeld()
         {
             return this.currentMouseState.RightButton == ButtonState.Pressed && this.previousMouseState.RightButton == ButtonState.Pressed;
+        }
+
+        /// <summary>
+        /// If the middle mouse button (scroll weel) is currently being pressed
+        /// </summary>
+        /// <returns>Pressed or not</returns>
+        public bool MiddleMousePressed()
+        {
+            return this.currentMouseState.MiddleButton == ButtonState.Pressed && this.previousMouseState.MiddleButton == ButtonState.Released;
+        }
+
+        /// <summary>
+        /// If the middle mouse button (scroll well) is currently held
+        /// </summary>
+        /// <returns></returns>
+        public bool MiddleMouseHeld()
+        {
+            return this.currentMouseState.MiddleButton == ButtonState.Pressed && this.previousMouseState.MiddleButton == ButtonState.Released; 
         }
 
         /// <summary>
