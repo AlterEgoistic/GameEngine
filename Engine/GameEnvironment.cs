@@ -26,7 +26,7 @@ namespace Engine
 
         private static bool pauseInput;
 
-        protected GameEnvironment()
+        public GameEnvironment()
         {
             this.graphics = new GraphicsDeviceManager(this);
             GameEnvironment.pauseInput = false;
