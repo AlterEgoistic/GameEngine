@@ -63,5 +63,10 @@ namespace Engine
         {
             get { return (int) this.font.MeasureString(this.text).Y; }
         }
+
+        public override Vector2 Center
+        {
+            get { return new Vector2(this.position.X + this.Width / 2, this.position.Y + this.Height / 2); }
+        }
     }
 }

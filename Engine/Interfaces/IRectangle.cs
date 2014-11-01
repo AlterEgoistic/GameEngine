@@ -8,7 +8,7 @@ namespace Engine
 {
     public interface IRectangle
     {
-        public Rectangle BoundingBox
+        Rectangle BoundingBox
         {
             get;
             set;

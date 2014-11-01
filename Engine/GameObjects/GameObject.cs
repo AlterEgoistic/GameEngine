@@ -9,21 +9,23 @@ namespace Engine
 {
     public abstract class GameObject : ILoopGameObject
     {
-        protected Vector2 position;
-
-        protected Vector2 velocity;
-
-        protected String id;
-
         protected int layer;
-
-        protected LoopingObjectList parent;
 
         protected bool isVisible;
 
         protected bool isInView;
 
         protected bool generateCollider;
+
+        protected bool alwaysAnimate;
+
+        protected String id;
+
+        protected Vector2 position;
+
+        protected Vector2 velocity;
+
+        protected LoopingObjectList parent;
 
         protected IRectangle rectangleCollider;
 
@@ -64,14 +66,7 @@ namespace Engine
 
         public virtual void Update(GameTime gameTime)
         {
-            if(GameEnvironment.Camera.IsInView(this))
-            {
-                this.isInView = true;
-            }
-            else
-            {
-                this.isInView = false;
-            }
+            this.isInView = GameEnvironment.Camera.IsInView(this);
             this.position += (this.velocity * (float) gameTime.ElapsedGameTime.TotalMilliseconds);
         }
 
@@ -121,7 +116,6 @@ namespace Engine
                     return ownCircleCollider.BoundingCircle.Intersects(otherCircleColider.BoundingCircle);
                 }
             }
-            
             throw new ArgumentException("Not every GameObject has a shape attached");
         }
 
@@ -158,7 +152,7 @@ namespace Engine
             set { this.isVisible = value; }
         }
 
-        public virtual int Width
+        public abstract int Width
         {
             get;
         }

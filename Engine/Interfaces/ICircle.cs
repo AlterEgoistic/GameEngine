@@ -7,7 +7,7 @@ namespace Engine
 {
     public interface ICircle
     {
-        public Circle BoundingCircle
+        Circle BoundingCircle
         {
             get;
             set;
