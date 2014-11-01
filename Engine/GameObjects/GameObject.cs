@@ -9,37 +9,65 @@ namespace Engine
 {
     public abstract class GameObject : ILoopGameObject
     {
+        /// <summary>
+        /// THe layer to draw the object on
+        /// </summary>
         protected int layer;
 
+        /// <summary>
+        /// Whether the object should be visible (drawn on screen) or not
+        /// </summary>
         protected bool isVisible;
 
+        /// <summary>
+        /// Whether the object is visible in the current viewport/camera view
+        /// </summary>
         protected bool isInView;
 
+        /// <summary>
+        /// If a collider should be generated for this object, based on the interface implemented
+        /// </summary>
         protected bool generateCollider;
 
+        /// <summary>
+        /// Whether the object should carry on playing animations when no longer visible in the current viewport/camera view
+        /// </summary>
         protected bool alwaysAnimate;
 
+        /// <summary>
+        /// If the object should also check for collisions when not visible in the viewport/camera view
+        /// </summary>
+        protected bool alwaysCheckCollision;
+
+        /// <summary>
+        /// The identifying name/tag/id for this object; to recognize the GameObject with
+        /// </summary>
         protected String id;
 
+        /// <summary>
+        /// The current position of the object on the screen/spritebatch
+        /// </summary>
         protected Vector2 position;
 
+        /// <summary>
+        /// The displacement of the object per second
+        /// </summary>
         protected Vector2 velocity;
 
+        /// <summary>
+        /// The ObjectList or GameState that contains this object (the one directly above only)
+        /// </summary>
         protected LoopingObjectList parent;
-
-        protected IRectangle rectangleCollider;
-
-        protected ICircle circleCollider;
 
         public GameObject(String id = "", int layer = 0)
         {
+            this.alwaysCheckCollision = true;
             this.isVisible = true;
             this.id = id;
             this.layer = layer; 
             this.velocity = Vector2.Zero;
             this.position = Vector2.Zero;
             this.isInView = false;
-            this.rectangleCollider = this as IRectangle;
             if(this.generateCollider)
             {
                 ICircle circleCollider = this as ICircle;
@@ -70,20 +98,33 @@ namespace Engine
             this.position += (this.velocity * (float) gameTime.ElapsedGameTime.TotalMilliseconds);
         }
 
+        /// <summary>
+        /// Check if any keys or mouse buttons are pressed
+        /// </summary>
+        /// <param name="inputHelper"></param>
         public virtual void HandleInput(InputHelper inputHelper)
         {
 
         }
 
+        /// <summary>
+        /// Resets the object to it's starting state
+        /// </summary>
         public virtual void Reset()
         {
             this.position = Vector2.Zero;
             this.velocity = Vector2.Zero;
         }
 
+        /// <summary>
+        /// Checks whether two objects, that both have a collider, are colliding with eachother or not
+        /// </summary>
+        /// <param name="other">The object to check collision with</param>
+        /// <param name="includeInvisible">Whether it should check collision if objects that have isVisible set to false</param>
+        /// <returns>Objects collide or not</returns>
         public bool CollidesWith(GameObject other, bool includeInvisible = false)
         {
-            if((!this.isVisible || !other.IsVisible || !this.isInView || !other.IsInView) && !includeInvisible)
+            if(((!this.isVisible || !other.IsVisible) && !includeInvisible) || (this.isInView && this.alwaysCheckCollision))
             {
                 return false;
             }

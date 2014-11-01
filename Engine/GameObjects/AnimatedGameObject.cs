@@ -11,11 +11,20 @@ namespace Engine
 {
     public class AnimatedGameObject : GameObject
     {
+        /// <summary>
+        /// Whether the current animation should be horizontally mirrored
+        /// </summary>
+        protected bool mirror;
+
+        /// <summary>
+        /// The animation that is currently being played
+        /// </summary>
         private Animation currentAnimation;
 
+        /// <summary>
+        /// The set of animations that can be played
+        /// </summary>
         private Dictionary<String, Animation> animations;
-
-        private bool mirror; 
 
         /// <summary>
         /// A GameObject using one or several animation(s) 
@@ -81,7 +90,7 @@ namespace Engine
         /// <summary>
         /// Plays an animation that is already loaded
         /// </summary>
-        /// <param name="idInDictionary"></param>
+        /// <param name="idInDictionary">The name of the </param>
         public void PlayAnimation(String idInDictionary)
         {
             if(animations[idInDictionary] == this.currentAnimation)
@@ -158,6 +167,11 @@ namespace Engine
         {
             get { return this.mirror; }
             set { this.mirror = value; }
+        }
+
+        public Animation CurrentAnimation
+        {
+            get { return this.currentAnimation; }
         }
     }
 }

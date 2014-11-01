@@ -11,14 +11,31 @@ namespace Engine
 {
     public class TextGameObject : GameObject
     {
+        /// <summary>
+        /// The string to draw
+        /// </summary>
         protected String text;
 
+        /// <summary>
+        /// The color of the text
+        /// </summary>
         protected Color textColor;
 
+        /// <summary>
+        /// The font to use for drawing the text
+        /// </summary>
         protected SpriteFont font;
 
+        /// <summary>
+        /// Creates a new Game Object that draws text on the screen
+        /// </summary>
+        /// <param name="fontName">The name of the font asset to load</param>
+        /// <param name="text">The text to draw</param>
+        /// <param name="textColor">The color of the text</param>
+        /// <param name="id">The name the object can be identified with</param>
+        /// <param name="layer">The layer to draw the object on</param>
         public TextGameObject(String fontName, String text, Color textColor, String id = "", int layer = 0)
-            : base()
+            : base(id, layer)
         {
             this.textColor = textColor;
             if(text != null)
@@ -33,6 +50,11 @@ namespace Engine
             this.font = GameEnvironment.AssetManager.GetAsset<SpriteFont>(fontName);
         }
 
+        /// <summary>
+        /// Draws the text on the screen
+        /// </summary>
+        /// <param name="gameTime">Contains information about the time in the game</param>
+        /// <param name="spriteBatch">The spritebatch to draw it on/with</param>
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             if(this.isVisible && this.text != null && this.isInView)
