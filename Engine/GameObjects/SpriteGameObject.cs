@@ -52,7 +52,7 @@ namespace Engine
             get { return this.sprite.Height; }
         }
 
-        public virtual Vector2 Center
+        public override Vector2 Center
         {
             get { return this.sprite.Center; }
         }
