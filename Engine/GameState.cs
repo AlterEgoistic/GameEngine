@@ -15,13 +15,24 @@ namespace Engine
         protected Point world;
 
         /// <summary>
+        /// Creates a new GameState with worldsize equal to screensize
+        /// </summary>
+        /// <param name="world"></param>
+        public GameState()
+            : base()
+        {
+            this.world = GameEnvironment.Screen;
+        }
+
+        /// <summary>
         /// Creates a new GameState
         /// </summary>
-        /// <param name="world">The GameWorldSize of the current GameState</param>
+        /// <param name="world">The GameWorldSize of the current GameState. Must be larger than screen size</param>
         public GameState(Point world)
             : base()
         {
-            this.world = world; 
+            this.world.X = world.X < GameEnvironment.Screen.X ? GameEnvironment.Screen.X : world.X;
+            this.world.Y = world.Y < GameEnvironment.Screen.Y ? GameEnvironment.Screen.Y : world.Y; 
         }
 
         /// <summary>
