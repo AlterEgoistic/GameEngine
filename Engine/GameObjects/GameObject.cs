@@ -46,14 +46,14 @@ namespace Engine
                     circleCollider.BoundingCircle = new Circle(this.Width > this.Height ? this.Width : this.Height, this.Center);
                 }
                 IRectangle rectCollider = this as IRectangle;
-                if(rectCollider != null && circleCollider != null)
-                {
-                    throw new NotSupportedException("GameObjects cannot implement multiple colliders");
-                }
                 if(rectCollider != null)
                 {
                     rectCollider.BoundingBox = new Rectangle((int) this.position.X, (int) this.position.Y, this.Width, this.Height);
                 }
+            }
+            if(this is ICircle && this is IRectangle)
+            {
+                throw new NotSupportedException("GameObjects cannot implement multiple colliders/collider shapes");
             }
         }
 
