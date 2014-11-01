@@ -47,7 +47,7 @@ namespace Engine
         public bool IsInView(GameObject gameObj)
         {
              Rectangle currentView = new Rectangle((int) -this.view.Translation.X, (int) -this.view.Translation.Y, GameEnvironment.Screen.X, GameEnvironment.Screen.Y);
-             return gameObj.BoundingBox.Intersects(currentView);           
+             return gameObj.DrawingBox.Intersects(currentView);           
         }
 
         public Vector2 ViewToWorld(Vector2 viewPosition)

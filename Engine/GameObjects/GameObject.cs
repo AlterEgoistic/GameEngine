@@ -224,5 +224,14 @@ namespace Engine
         {
             get { return this.isInView; }
         }
+
+        /// <summary>
+        /// The rectangle around the sprite itself
+        /// Used for culling
+        /// </summary>
+        public Rectangle DrawingBox
+        {
+            get { return new Rectangle((int) this.position.X, (int) this.position.Y, this.Width, this.Height); }
+        }
     }
 }
