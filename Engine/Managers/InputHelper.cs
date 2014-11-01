@@ -80,6 +80,11 @@ namespace Engine
             return this.currentMouseState.LeftButton == ButtonState.Pressed && this.previousMouseState.LeftButton == ButtonState.Released;
         }
 
+        public bool LeftMouseHold()
+        {
+            return this.currentMouseState.LeftButton == ButtonState.Pressed && this.previousMouseState.LeftButton == ButtonState.Pressed;
+        }
+
         /// <summary>
         /// Whether the right mouse button is/was pressed
         /// </summary>
@@ -87,6 +92,15 @@ namespace Engine
         public bool RightMousePressed()
         {
             return this.currentMouseState.RightButton == ButtonState.Pressed && this.previousMouseState.RightButton == ButtonState.Released;
+        }
+
+        /// <summary>
+        /// Whether the right mouse is being hold
+        /// </summary>
+        /// <returns>Whether the user is holding the right mouse button or not</returns>
+        public bool RightMouseHold()
+        {
+            return this.currentMouseState.RightButton == ButtonState.Pressed && this.previousMouseState.RightButton == ButtonState.Pressed;
         }
 
         /// <summary>
@@ -118,7 +132,7 @@ namespace Engine
 
         public int ScrollWheelValue
         {
-            get { return this.ScrollWheelValue; }
+            get { return this.currentMouseState.ScrollWheelValue; }
         }
 
         public Vector2 Scale
