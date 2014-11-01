@@ -22,10 +22,16 @@ namespace Engine
             base.Update(gameTime);
         }
 
+        public override void Reset()
+        {
+            GameEnvironment.Camera.CameraPosition = Vector2.Zero;
+            base.Reset();
+        }
         public Point World
         {
             get { return this.world; }
         }
+
 
     }
 }
