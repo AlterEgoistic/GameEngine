@@ -17,7 +17,6 @@ namespace Engine
         /// <summary>
         /// Creates a new GameState with worldsize equal to screensize
         /// </summary>
-        /// <param name="world"></param>
         public GameState()
             : base()
         {
@@ -32,7 +31,7 @@ namespace Engine
             : base()
         {
             this.world.X = world.X < GameEnvironment.Screen.X ? GameEnvironment.Screen.X : world.X;
-            this.world.Y = world.Y < GameEnvironment.Screen.Y ? GameEnvironment.Screen.Y : world.Y; 
+            this.world.Y = world.Y < GameEnvironment.Screen.Y ? GameEnvironment.Screen.Y : world.Y;
         }
 
         /// <summary>

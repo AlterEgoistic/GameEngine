@@ -21,7 +21,7 @@ namespace Engine
         /// <param name="sheetRows">The amount of rows the spritesheet has</param>
         /// <param name="sheetColumns">The amount of columns the spritesheet has</param>
         /// <param name="id">Name of the spritegame object to identify it</param>
-        /// <param name="layer">The laye rto draw the sprite on</param>
+        /// <param name="layer">The layer to draw the sprite on</param>
         public SpriteGameObject(String assetName,  int sheetRows = 1, int sheetColumns = 1, String id = "", int layer = 0)
             : base(id, layer)
         {
