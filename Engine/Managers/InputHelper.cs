@@ -160,11 +160,5 @@ namespace Engine
         {
             get { return this.currentMouseState.ScrollWheelValue; }
         }
-
-        public Vector2 Scale
-        {
-            get { return this.scale; }
-            set { this.scale = value; }
-        }
     }
 }
