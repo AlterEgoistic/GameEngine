@@ -81,12 +81,44 @@ namespace Engine
         }
 
         /// <summary>
+        /// Whether the right mouse button is/was pressed
+        /// </summary>
+        /// <returns>If the right button was pressed or not</returns>
+        public bool RightMousePressed()
+        {
+            return this.currentMouseState.RightButton == ButtonState.Pressed && this.previousMouseState.RightButton == ButtonState.Released;
+        }
+
+        /// <summary>
+        /// If the user has scrolled up using the mouse wheel
+        /// </summary>
+        /// <returns>Scrolled up or not</returns>
+        public bool ScrolledUp()
+        {
+            return this.currentMouseState.ScrollWheelValue > this.previousMouseState.ScrollWheelValue;
+        }
+
+        /// <summary>
+        /// If the user has scrolled down using the mouse wheel
+        /// </summary>
+        /// <returns>Scrolled down or not</returns>
+        public bool ScrolledDown()
+        {
+            return this.currentMouseState.ScrollWheelValue < this.previousMouseState.ScrollWheelValue;
+        }
+
+        /// <summary>
         /// The current position on the screen of the mouse
         /// </summary>
         public Vector2 MousePosition
         {
             get { return new Vector2(this.currentMouseState.Position.X, this.currentMouseState.Position.Y); }
-            set { Mouse.SetPosition((int) Math.Floor(value.X), (int) Math.Floor(value.Y)); }
+            set { Mouse.SetPosition((int) value.X, (int) value.Y); }
+        }
+
+        public int ScrollWheelValue
+        {
+            get { return this.ScrollWheelValue; }
         }
 
         public Vector2 Scale
