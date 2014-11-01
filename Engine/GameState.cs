@@ -31,7 +31,5 @@ namespace Engine
         {
             get { return this.world; }
         }
-
-
     }
 }

@@ -98,7 +98,7 @@ namespace Engine
 
         public override void Update(GameTime gameTime)
         {
-            if(this.currentAnimation != null && this.isVisible)
+            if(this.currentAnimation != null && (this.isInView || this.alwaysAnimate) && this.isVisible)
             {
                 this.currentAnimation.Update(gameTime);
                 this.currentAnimation.Mirror = mirror; 
@@ -108,7 +108,7 @@ namespace Engine
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-            if(this.currentAnimation != null && this.isVisible)
+            if(this.currentAnimation != null && this.isInView && this.isVisible)
             {
                 this.currentAnimation.Draw(spriteBatch, this.position);
             }
@@ -125,7 +125,7 @@ namespace Engine
                 }
                 else
                 {
-                    return base.Width;
+                    return 0;
                 }
             }
         }
@@ -138,10 +138,19 @@ namespace Engine
                 {
                     return this.currentAnimation.Height;
                 }
-                else
+                return 0;
+            }
+        }
+
+        public override Vector2 Center
+        {
+            get 
+            {
+                if(this.currentAnimation != null)
                 {
-                    return base.Height;
+                    return this.currentAnimation.Center;
                 }
+                return Vector2.Zero;
             }
         }
 
@@ -150,7 +159,5 @@ namespace Engine
             get { return this.mirror; }
             set { this.mirror = value; }
         }
-
-        
     }
 }

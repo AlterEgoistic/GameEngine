@@ -24,20 +24,20 @@ namespace Engine
             }
         }
 
-        public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+        protected override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-            if(this.isVisible && this.isInView)
+            if(this.isInView && this.isVisible)
             {
                 this.sprite.Draw(spriteBatch, this.position);
-                base.Draw(gameTime, spriteBatch);
             }
+            base.Draw(gameTime, spriteBatch);
         }
 
-        public override void Update(GameTime gameTime)
+        protected override void Update(GameTime gameTime)
         {
-            if(this.isVisible)
+            if((this.isInView || this.alwaysAnimate) && this.isVisible)
             {
-                this.sprite.Update(gameTime); 
+                this.sprite.Update(gameTime);
             }
             base.Update(gameTime);
         }

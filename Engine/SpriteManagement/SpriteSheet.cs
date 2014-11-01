@@ -124,11 +124,11 @@ namespace Engine
             this.spritePart = new Rectangle((int) this.Width * columnIndex, (int) this.Height * rowIndex, this.Width, this.Height);
             if(this.mirror)
             {
-                spriteEffects = SpriteEffects.FlipHorizontally;
+                this.spriteEffects = SpriteEffects.FlipHorizontally;
             }
             else
             {
-                spriteEffects = SpriteEffects.None;
+                this.spriteEffects = SpriteEffects.None;
             }
         }
 
