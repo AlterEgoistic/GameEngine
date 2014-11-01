@@ -81,18 +81,102 @@ namespace Engine
         }
 
         /// <summary>
+        /// Whether the left mouse button is being held
+        /// </summary>
+        /// <returns>If the user is holding it or not</returns>
+        public bool LeftMouseHeld()
+        {
+            return this.currentMouseState.LeftButton == ButtonState.Pressed && this.previousMouseState.LeftButton == ButtonState.Pressed;
+        }
+
+        /// <summary>
+        /// Whether the right mouse button is/was pressed
+        /// </summary>
+        /// <returns>If the right button was pressed or not</returns>
+        public bool RightMousePressed()
+        {
+            return this.currentMouseState.RightButton == ButtonState.Pressed && this.previousMouseState.RightButton == ButtonState.Released;
+        }
+
+        /// <summary>
+        /// Whether the right mouse button is being held
+        /// </summary>
+        /// <returns>Whether the user is holding the right mouse button or not</returns>
+        public bool RightMouseHeld()
+        {
+            return this.currentMouseState.RightButton == ButtonState.Pressed && this.previousMouseState.RightButton == ButtonState.Pressed;
+        }
+
+        /// <summary>
+        /// If the middle mouse button (scroll weel) is currently being pressed
+        /// </summary>
+        /// <returns>Pressed or not</returns>
+        public bool MiddleMousePressed()
+        {
+            return this.currentMouseState.MiddleButton == ButtonState.Pressed && this.previousMouseState.MiddleButton == ButtonState.Released;
+        }
+
+        /// <summary>
+        /// If the middle mouse button (scroll well) is currently held
+        /// </summary>
+        /// <returns></returns>
+        public bool MiddleMouseHeld()
+        {
+            return this.currentMouseState.MiddleButton == ButtonState.Pressed && this.previousMouseState.MiddleButton == ButtonState.Released; 
+        }
+
+        /// <summary>
+        /// If the user has scrolled up using the mouse wheel
+        /// </summary>
+        /// <returns>Scrolled up or not</returns>
+        public bool ScrolledUp()
+        {
+            return this.currentMouseState.ScrollWheelValue > this.previousMouseState.ScrollWheelValue;
+        }
+
+        /// <summary>
+        /// If the user has scrolled down using the mouse wheel
+        /// </summary>
+        /// <returns>Scrolled down or not</returns>
+        public bool ScrolledDown()
+        {
+            return this.currentMouseState.ScrollWheelValue < this.previousMouseState.ScrollWheelValue;
+        }
+
+        /// <summary>
         /// The current position on the screen of the mouse
         /// </summary>
         public Vector2 MousePosition
         {
             get { return new Vector2(this.currentMouseState.Position.X, this.currentMouseState.Position.Y); }
-            set { Mouse.SetPosition((int) Math.Floor(value.X), (int) Math.Floor(value.Y)); }
+            set { Mouse.SetPosition((int) value.X, (int) value.Y); }
         }
 
-        public Vector2 Scale
+        public Keys[] GetPressedKeys()
         {
-            get { return this.scale; }
-            set { this.scale = value; }
+            List<Keys> pressed = new List<Keys>();
+            for(int i = 0; i < this.currentKeyboardstate.GetPressedKeys().Length; i++)
+            {
+                if(this.IsKeyPressed(this.currentKeyboardstate.GetPressedKeys()[i]))
+                {
+                    pressed.Add(this.currentKeyboardstate.GetPressedKeys()[i]);
+                }
+            }
+            return pressed.ToArray();
+        }
+
+        public Keys[] GetHeldKeys()
+        {
+            return this.currentKeyboardstate.GetPressedKeys();
+        }
+
+        /// <summary>
+        /// Gets the value of the scrollwhee
+        /// Positive value means more scrolled up than down
+        /// </summary>
+        public int ScrollWheelValue
+        {
+            get { return this.currentMouseState.ScrollWheelValue; }
         }
     }
 }
