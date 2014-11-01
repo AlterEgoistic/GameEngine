@@ -60,8 +60,9 @@ namespace Engine
             if(this.isVisible && this.isInView)
             {
                 spriteBatch.DrawString(this.font, this.text, this.position, this.textColor);
-                base.Draw(gameTime, spriteBatch);
             }
+            base.Draw(gameTime, spriteBatch);
+
         }
 
         public String Text

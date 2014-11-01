@@ -53,6 +53,7 @@ namespace Engine
                 return true; 
             }
             Rectangle currentView = new Rectangle((int) -this.view.Translation.X, (int) -this.view.Translation.Y, GameEnvironment.Screen.X, GameEnvironment.Screen.Y);
+            Console.WriteLine(currentView.Location.X + " " + currentView.Location.Y + " " + currentView.Right + " " + currentView.Bottom);
             return gameObj.DrawingBox.Intersects(currentView);           
         }
 

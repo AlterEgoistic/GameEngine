@@ -48,7 +48,7 @@ namespace Engine
 
             GameEnvironment.assetManager = new AssetManager(this.Content);
             GameEnvironment.gameStateManager = new GameStateManager();
-            GameEnvironment.screen = new Point(0, 0);
+            GameEnvironment.screen = new Point(GraphicsDevice.PresentationParameters.BackBufferWidth, GraphicsDevice.PresentationParameters.BackBufferHeight);
 
             GameEnvironment.camera = new Camera();
         }
@@ -82,7 +82,7 @@ namespace Engine
             GameEnvironment.gameStateManager.Update(gameTime);
             if(GameEnvironment.gameStateManager.CurrentWorld != GameEnvironment.screen)
             {
-                GameEnvironment.camera.IsDisabled = true;
+                GameEnvironment.camera.IsDisabled = false;
                 GameEnvironment.camera.Update(gameTime);
             }
             else
