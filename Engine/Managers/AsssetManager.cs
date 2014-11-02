@@ -15,7 +15,7 @@ namespace Engine
     {
         private ContentManager content;
 
-        public AssetManager(ContentManager content)
+        internal AssetManager(ContentManager content)
         {
             this.content = content; 
         }
@@ -23,7 +23,7 @@ namespace Engine
         /// <summary>
         /// Loads an asset of given type
         /// </summary>
-        /// <typeparam name="T">The kind of asset to load</typeparam>
+        /// <typeparam name="T">The type of asset to load</typeparam>
         /// <param name="assetName">The name of the asset to load (include the file extension for non xnb files)</param>
         /// <returns>The asset of given type</returns>
         public T GetAsset<T>(String assetName)

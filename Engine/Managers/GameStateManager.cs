@@ -18,7 +18,7 @@ namespace Engine
     {
         private GameState currentGameState;
 
-        public GameStateManager()
+        internal GameStateManager()
         {
             this.currentGameState = null;
         }
@@ -32,14 +32,24 @@ namespace Engine
         {
             if(this.currentGameState != null && typeof(T) == this.currentGameState.GetType() && !restart)
             {
-                Console.WriteLine("You are switching to the same state as the current game state. Method will terminate.");
+                Console.Error.WriteLine("You are switching to the same state as the current game state. Method will terminate.");
                 return;
             }
             GameEnvironment.Camera.CameraPosition = Vector2.Zero;
-            this.currentGameState = null;
             this.currentGameState = (GameState) Activator.CreateInstance(typeof(T));
+            if(this.CurrentWorld == GameEnvironment.Screen)
+            {
+                GameEnvironment.Camera.IsDisabled = true;
+            }
+            else
+            {
+                GameEnvironment.Camera.IsDisabled = false;
+            }
         }
 
+        /// <summary>
+        /// The Gamestate currently active
+        /// </summary>
         public GameState CurrentGameState
         {
             get 
@@ -76,6 +86,9 @@ namespace Engine
             }
         }
 
+        /// <summary>
+        /// Resets the current state back to it's original state
+        /// </summary>
         public void ResetCurrentState()
         {
             if(this.currentGameState != null)

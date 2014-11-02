@@ -12,18 +12,47 @@ namespace Engine
 {
     public class GameEnvironment : Game
     {
+        /// <summary>
+        /// The graphics device manager the game should use for handling the display
+        /// </summary>
         protected GraphicsDeviceManager graphics;
+        /// <summary>
+        /// The spritebatch to draw on/with
+        /// </summary>
         protected SpriteBatch spriteBatch;
 
+        /// <summary>
+        /// The inputhandler that needs to check all the input within the game
+        /// </summary>
         protected InputHelper inputHelper;
+        
+        /// <summary>
+        /// The background color of the spritebatch
+        /// </summary>
         protected Color backgroundColor;
 
+        /// <summary>
+        /// The dimensions of the screen
+        /// </summary>
         protected static Point screen;
+        /// <summary>
+        /// The assetmanager to load all types of content and play sounds and music in the game
+        /// </summary>
         protected static AssetManager assetManager;
+
+        /// <summary>
+        /// The GameStateManager that handles all the switching between different menus and levels in the game
+        /// </summary>
         protected static GameStateManager gameStateManager;
 
+        /// <summary>
+        /// The camera to use for displaying
+        /// </summary>
         protected static Camera camera;
 
+        /// <summary>
+        /// Makes the game ignore input
+        /// </summary>
         private static bool pauseInput;
 
         public GameEnvironment()
@@ -80,14 +109,9 @@ namespace Engine
         {
             this.HandleInput();
             GameEnvironment.gameStateManager.Update(gameTime);
-            if(GameEnvironment.gameStateManager.CurrentWorld != GameEnvironment.screen)
+            if(GameEnvironment.camera.IsDisabled)
             {
-                GameEnvironment.camera.IsDisabled = false;
                 GameEnvironment.camera.Update(gameTime);
-            }
-            else
-            {
-                GameEnvironment.camera.IsDisabled = true; 
             }
             base.Update(gameTime);
         }
@@ -107,8 +131,11 @@ namespace Engine
 
         protected virtual void HandleInput()
         {
-             this.inputHelper.Update();
-             GameEnvironment.gameStateManager.HandleInput(this.inputHelper);
+            if(!GameEnvironment.pauseInput)
+            {
+                this.inputHelper.Update();
+                GameEnvironment.gameStateManager.HandleInput(this.inputHelper);
+            }
         }
 
         public static AssetManager AssetManager

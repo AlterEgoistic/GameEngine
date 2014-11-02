@@ -24,7 +24,7 @@ namespace Engine
         /// <summary>
         /// Checks every update for keypresses, mousepresses and mouse movement
         /// </summary>
-        public InputHelper()
+        internal InputHelper()
         {
             this.scale = new Vector2(1,1);
         }
@@ -152,6 +152,11 @@ namespace Engine
             set { Mouse.SetPosition((int) value.X, (int) value.Y); }
         }
 
+        /// <summary>
+        /// Returns all keys being pressed
+        /// Note: Keys that represent letters in the alfabet are limited to 2 active keys at a time
+        /// </summary>
+        /// <returns>An array of keys that are being pressed</returns>
         public Keys[] GetPressedKeys()
         {
             List<Keys> pressed = new List<Keys>();
@@ -165,6 +170,11 @@ namespace Engine
             return pressed.ToArray();
         }
 
+        /// <summary>
+        /// Returns all keys being held
+        /// Note: Keys that represent letters in the alfabet are limited to 2 active keys at a time
+        /// </summary>
+        /// <return>An array of keys that are being held</return>
         public Keys[] GetHeldKeys()
         {
             return this.currentKeyboardstate.GetPressedKeys();

@@ -32,7 +32,7 @@ namespace Engine
         void HandleInput(InputHelper inputHelper);
 
         /// <summary>
-        /// Sets the object or the objects in this list back to its original 
+        /// Sets the object or the objects in this list back to its original state
         /// </summary>
         void Reset();
 
