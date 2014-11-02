@@ -61,13 +61,16 @@ namespace Engine
 
         public GameObject(String id = "", int layer = 0)
         {
-            this.alwaysCheckCollision = true;
-            this.isVisible = true;
             this.id = id;
             this.layer = layer; 
+
+            this.alwaysCheckCollision = true;
+            this.isVisible = true;
+            this.isInView = false;
+
             this.velocity = Vector2.Zero;
             this.position = Vector2.Zero;
-            this.isInView = false;
+
             if(this.generateCollider)
             {
                 ICircle circleCollider = this as ICircle;
@@ -100,7 +103,7 @@ namespace Engine
         /// <summary>
         /// Check if any keys or mouse buttons are pressed
         /// </summary>
-        /// <param name="inputHelper"></param>
+        /// <param name="inputHelper">The inputhelper to use for detecting input</param>
         public virtual void HandleInput(InputHelper inputHelper)
         {
 
@@ -113,6 +116,7 @@ namespace Engine
         {
             this.position = Vector2.Zero;
             this.velocity = Vector2.Zero;
+            this.isInView = false;
         }
 
         /// <summary>
@@ -158,17 +162,6 @@ namespace Engine
             }
             throw new ArgumentException("Not every GameObject has a shape attached");
         }
-
-        /*
-        public Rectangle GetCollisionRectangle(GameObject gameObj, bool includeInvisibleObjects)
-        {
-            if(!this.isInView || (!this.isVisible && includeInvisibleObjects) || (!gameObj.IsVisible && includeInvisibleObjects))
-            {
-                return Rectangle.Empty;
-            }
-            return Rectangle.Intersect(gameObj.BoundingBox, this.BoundingBox);
-        }
-         */
 
         public LoopingObjectList Parent
         {
@@ -228,7 +221,7 @@ namespace Engine
         /// The rectangle around the sprite itself
         /// Used for culling
         /// </summary>
-        public Rectangle DrawingBox
+        internal Rectangle DrawingBox
         {
             get { return new Rectangle((int) this.position.X, (int) this.position.Y, this.Width, this.Height); }
         }
