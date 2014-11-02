@@ -8,27 +8,55 @@ namespace Engine
 {
     public class SpriteSheet
     {
+        /// <summary>
+        /// The amount of rows the spritesheet has
+        /// </summary>
         private int sheetRows;
 
+        /// <summary>
+        /// The amount of columns the spritesheet has
+        /// </summary>
         private int sheetColumns;
 
+        /// <summary>
+        /// Where the part of the spritesheet to use starts, if applicable
+        /// </summary>
         protected int startingSheetIndex;
 
+        /// <summary>
+        /// Where the part of the spritesheet to use starts, if applicable
+        /// </summary>
         protected int endingSheetIndex;
 
+        /// <summary>
+        /// The column index of the current sprite used
+        /// </summary>
         protected int columnIndex;
 
+        /// <summary>
+        /// The row index of the current sprite used
+        /// </summary>
         protected int rowIndex;
 
+        /// <summary>
+        /// The index in the spritesheet of the current sprite used
+        /// </summary>
         private int sheetIndex;
 
+        /// <summary>
+        /// Whether the sprite(s) used should be flipped horizontally
+        /// </summary>
         private bool mirror;
 
+        /// <summary>
+        /// The texture that contains the spritesheet
+        /// </summary>
         protected Texture2D sprite;
 
+        /// <summary>
+        /// The rectangle that resembles the location of the current sheetindex in the spritesheet
+        /// </summary>
         private Rectangle spritePart;
-
-        private SpriteEffects spriteEffects;
 
         private Vector2 center;
 
@@ -52,7 +80,6 @@ namespace Engine
             this.startingSheetIndex = 0;
             this.endingSheetIndex = sheetRows * sheetColumns - 1;
             this.spritePart = new Rectangle(0, 0, this.Width, this.Height);
-            this.spriteEffects = SpriteEffects.None;
             this.center = new Vector2(this.Width / 2, this.Height / 2);
             this.color = Color.White;
         }
@@ -85,7 +112,6 @@ namespace Engine
             this.startingSheetIndex = startingSheetIndex;
             this.endingSheetIndex = endingSheetIndex;
             this.spritePart = new Rectangle(0, 0, this.Width, this.Height);
-            this.spriteEffects = SpriteEffects.None;
         }
 
         /// <summary>
@@ -96,7 +122,7 @@ namespace Engine
         /// <param name="position">Location of the sprite(gameobject) </param>
         public void Draw(SpriteBatch spriteBatch, Vector2 position)
         {
-            spriteBatch.Draw(this.sprite, position, this.spritePart, this.color, 0.0f, Vector2.Zero, 1.0f, this.spriteEffects, 0.0f);
+            spriteBatch.Draw(this.sprite, position, this.spritePart, this.color, 0.0f, Vector2.Zero, 1.0f, this.mirror ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 0.0f);
         }
 
         /// <summary>
@@ -110,7 +136,7 @@ namespace Engine
         /// <param name="scale"></param>
         public void Draw(SpriteBatch spriteBatch, Vector2 position, float rotation, Vector2 origin, float scale)
         {
-            spriteBatch.Draw(this.sprite, position, this.spritePart, this.color, rotation, origin, scale, this.spriteEffects, 0.0f);
+            spriteBatch.Draw(this.sprite, position, this.spritePart, this.color, rotation, origin, scale, this.mirror ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 0.0f);
         }
 
         /// <summary>
@@ -122,14 +148,6 @@ namespace Engine
             this.columnIndex = this.sheetIndex % this.sheetColumns;
             this.rowIndex = (int) (this.sheetIndex / this.sheetColumns) % this.sheetRows;
             this.spritePart = new Rectangle((int) this.Width * columnIndex, (int) this.Height * rowIndex, this.Width, this.Height);
-            if(this.mirror)
-            {
-                this.spriteEffects = SpriteEffects.FlipHorizontally;
-            }
-            else
-            {
-                this.spriteEffects = SpriteEffects.None;
-            }
         }
 
         /// <summary>

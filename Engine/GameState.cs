@@ -48,7 +48,6 @@ namespace Engine
         /// </summary>
         public override void Reset()
         {
-            GameEnvironment.Camera.CameraPosition = Vector2.Zero;
             base.Reset();
         }
 

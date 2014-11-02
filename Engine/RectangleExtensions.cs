@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework;
 
 namespace Engine
 {
-    public static class RectangleExtensions
+    internal static class RectangleExtensions
     {
         /// <summary>
         /// Whether this is overlapping the given circle or not
