@@ -37,8 +37,8 @@
   <ItemGroup>
     <Compile Include="Camera.cs" />
     <Compile Include="GameObjects\AnimatedGameObject.cs" />
-    <Compile Include="GameObjects\RectangleExtensions.cs" />
-    <Compile Include="Interfaces\Circle.cs" />
+    <Compile Include="RectangleExtensions.cs" />
+    <Compile Include="Circle.cs" />
     <Compile Include="Interfaces\ICircle.cs" />
     <Compile Include="Interfaces\IRectangle.cs" />
     <Compile Include="Program.cs" />

@@ -38,26 +38,41 @@ namespace Engine
         /// <summary>
         /// The assetmanager to load all types of content and play sounds and music in the game
         /// </summary>
-        protected static AssetManager assetManager;
+        private static AssetManager assetManager;
 
         /// <summary>
         /// The GameStateManager that handles all the switching between different menus and levels in the game
         /// </summary>
-        protected static GameStateManager gameStateManager;
+        private static GameStateManager gameStateManager;
 
         /// <summary>
         /// The camera to use for displaying
         /// </summary>
-        protected static Camera camera;
+        private static Camera camera;
 
         /// <summary>
         /// Makes the game ignore input
         /// </summary>
         private static bool pauseInput;
 
-        public GameEnvironment()
+        /// <summary>
+        /// The amount of frames between calls to fixed update
+        /// </summary>
+        private static int fixedUpdateInterval;
+
+        /// <summary>
+        /// Determines how many frames have passed since the last fixed update
+        /// </summary>
+        private float frameCounter;
+
+        /// <summary>
+        /// Creates a new Game environment
+        /// </summary>
+        /// <param name="fixedUpdateInterval">The amount of frames between calls to fixed update </param>
+        public GameEnvironment(int fixedUpdateInterval = 1)
         {
             this.graphics = new GraphicsDeviceManager(this);
+            GameEnvironment.fixedUpdateInterval = fixedUpdateInterval;
             GameEnvironment.pauseInput = false;
             this.Content.RootDirectory = "Content";
         }
@@ -107,9 +122,17 @@ namespace Engine
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
+            this.frameCounter++;
             this.HandleInput();
+
+            while(this.frameCounter> GameEnvironment.fixedUpdateInterval)
+            {
+                this.frameCounter -= GameEnvironment.fixedUpdateInterval;
+                this.FixedUpdate(gameTime);
+            }
+
             GameEnvironment.gameStateManager.Update(gameTime);
-            if(GameEnvironment.camera.IsDisabled)
+            if(!GameEnvironment.camera.IsDisabled)
             {
                 GameEnvironment.camera.Update(gameTime);
             }
@@ -129,6 +152,19 @@ namespace Engine
             base.Draw(gameTime);
         }
 
+        /// <summary>
+        /// Update that is being called every given interval. Called before regular Update
+        /// Uses fixedUpdateInterval to determine call frequency
+        /// </summary>
+        protected virtual void FixedUpdate(GameTime gameTime)
+        {
+            GameEnvironment.gameStateManager.FixedUpdate(gameTime);
+        }
+
+        /// <summary>
+        /// Detects input to keyboard and mouse
+        /// Called before update and fixedupdate
+        /// </summary>
         protected virtual void HandleInput()
         {
             if(!GameEnvironment.pauseInput)
@@ -174,6 +210,12 @@ namespace Engine
         {
             get { return GameEnvironment.pauseInput; }
             set { GameEnvironment.pauseInput = value; }
+        }
+
+        public static int FixedUpdateInterval
+        {
+            get { return GameEnvironment.fixedUpdateInterval; }
+            set { GameEnvironment.fixedUpdateInterval = value; }
         }
     }
 }

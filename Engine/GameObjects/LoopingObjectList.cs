@@ -47,6 +47,18 @@ namespace Engine
         }
 
         /// <summary>
+        /// Calls fixed update on all objects in the last every set frame
+        /// </summary>
+        /// <param name="gameTime"> INformaton about the times in the game</param>
+        public virtual void FixedUpdate(GameTime gameTime)
+        {
+            foreach(var obj in this)
+            {
+                obj.FixedUpdate(gameTime);
+            }
+        }
+
+        /// <summary>
         /// Handles input on all the objects within this list
         /// </summary>
         /// <param name="inputHelper">The inputhelper to check the input with</param>
