@@ -228,7 +228,7 @@ namespace Engine
         /// The rectangle around the sprite itself
         /// Used for culling
         /// </summary>
-        public Rectangle DrawingBox
+        internal Rectangle DrawingBox
         {
             get { return new Rectangle((int) this.position.X, (int) this.position.Y, this.Width, this.Height); }
         }
