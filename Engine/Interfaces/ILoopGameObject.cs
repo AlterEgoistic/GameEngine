@@ -11,18 +11,24 @@ namespace Engine
     {
         /// <summary>
         /// Draws this object or the objects in this list on the screen
-        /// *Automatically called by its corresponding GameState*
+        /// *Automatically called by its corresponding GameState or list*
         /// </summary>
         /// <param name="gameTime">Contains information about how long the game has been running and time between updates</param>
         /// <param name="spriteBatch">Used to store and draw the sprites</param>
         void Draw(GameTime gameTime, SpriteBatch spriteBatch);
 
         /// <summary>
-        /// Updates information such as the position and velocity of this object or the objects in this list
-        /// *Automatically called by its corresponding GameState*
+        /// Updates values such as the position and velocity of this object or the objects in this list
+        /// *Automatically called by its corresponding GameState or list*
         /// </summary>
         /// <param name="gameTime">Contains information about how long the game has been running and time between updates</param>
         void Update(GameTime gameTime);
+
+        /// <summary>
+        /// Updates values such as the position and velocity of this object or objectlist every fixed frame
+        /// </summary>
+        /// <param name="gameTime">Contains information about how long the game has been running and time between updates</param>
+        void FixedUpdate(GameTime gameTime);
 
         /// <summary>
         /// Updates the input checking on this object or the objects in this list

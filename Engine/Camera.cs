@@ -30,12 +30,6 @@ namespace Engine
         private bool isDisabled;
 
         /// <summary>
-        /// The current instance
-        /// Only one camera can exist at a time
-        /// </summary>
-        private static Camera instance;
-
-        /// <summary>
         /// Creates a new camera
         /// </summary>
         internal Camera()

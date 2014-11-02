@@ -59,6 +59,11 @@ namespace Engine
         /// </summary>
         protected LoopingObjectList parent;
 
+        /// <summary>
+        /// Creates a new Object that can be placed into the game
+        /// </summary>
+        /// <param name="id">The name of the object to identify it with</param>
+        /// <param name="layer">The layer to draw the object on</param>
         public GameObject(String id = "", int layer = 0)
         {
             this.id = id;
@@ -98,6 +103,15 @@ namespace Engine
         {
             this.isInView = GameEnvironment.Camera.IsInView(this);
             this.position += (this.velocity * (float) gameTime.ElapsedGameTime.TotalMilliseconds);
+        }
+
+        /// <summary>
+        /// Updates values of the object every fixed frame
+        /// </summary>
+        /// <param name="gameTime">Contains information about how long the game has been running and the time between updates</param>
+        public virtual void FixedUpdate(GameTime gameTime)
+        {
+
         }
 
         /// <summary>
