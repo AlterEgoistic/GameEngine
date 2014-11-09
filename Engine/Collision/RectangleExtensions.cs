@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework;
 
 namespace Engine
 {
-    internal static class RectangleExtensions
+    public static class RectangleExtensions
     {
         /// <summary>
         /// Whether this is overlapping the given circle or not
@@ -17,7 +17,8 @@ namespace Engine
         {
             Vector2 distance = new Vector2(other.Center.X - MathHelper.Clamp((int) other.Center.X, self.Left, self.Right),
                                             other.Center.Y - MathHelper.Clamp((int) other.Center.Y, self.Top, self.Bottom));
-            //Since the distance is always bigger than the individual distanceX and distanceY (pythagoras), return false if 
+
+            //Since the actual distance is always bigger than the individual distanceX and distanceY (pythagoras), return false if 
             //either is larger than the radius
             if(distance.X > other.Radius || distance.Y > other.Radius)
             {

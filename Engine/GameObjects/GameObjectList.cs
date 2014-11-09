@@ -49,8 +49,8 @@ namespace Engine
         }
 
         /// <summary>
-        /// Gets if all objects in the list are visible or not
-        /// Sets visibility of all objects in this list
+        /// <para>Gets if all objects in the list are visible or not</para>
+        /// <para>Sets visibility of all objects in this list </para>
         /// </summary>
         public bool IsVisible
         {

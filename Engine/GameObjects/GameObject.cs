@@ -59,6 +59,11 @@ namespace Engine
         /// </summary>
         protected LoopingObjectList parent;
 
+        /// <summary>
+        /// Creates a new Object that can be placed into the game
+        /// </summary>
+        /// <param name="id">The name of the object to identify it with</param>
+        /// <param name="layer">The layer to draw the object on</param>
         public GameObject(String id = "", int layer = 0)
         {
             this.id = id;
@@ -101,6 +106,15 @@ namespace Engine
         }
 
         /// <summary>
+        /// Updates values of the object every fixed frame
+        /// </summary>
+        /// <param name="gameTime">Contains information about how long the game has been running and the time between updates</param>
+        public virtual void FixedUpdate(GameTime gameTime)
+        {
+
+        }
+
+        /// <summary>
         /// Check if any keys or mouse buttons are pressed
         /// </summary>
         /// <param name="inputHelper">The inputhelper to use for detecting input</param>
@@ -110,7 +124,7 @@ namespace Engine
         }
 
         /// <summary>
-        /// Resets the object to it's starting state
+        /// Resets the object to it's initial state
         /// </summary>
         public virtual void Reset()
         {
@@ -218,8 +232,8 @@ namespace Engine
         }
 
         /// <summary>
-        /// The rectangle around the sprite itself
-        /// Used for culling
+        /// <para>The rectangle around the sprite itself </para>
+        /// <para>Used for culling</para>   
         /// </summary>
         internal Rectangle DrawingBox
         {

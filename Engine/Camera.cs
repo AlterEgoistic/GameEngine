@@ -11,7 +11,7 @@ namespace Engine
         /// <summary>
         /// The object the camera is currently following
         /// </summary>
-        private GameObject focussedObject;
+        private GameObject focusedObject;
 
         /// <summary>
         /// The matrix used to calculate the camera viewport
@@ -30,12 +30,6 @@ namespace Engine
         private bool isDisabled;
 
         /// <summary>
-        /// The current instance
-        /// Only one camera can exist at a time
-        /// </summary>
-        private static Camera instance;
-
-        /// <summary>
         /// Creates a new camera
         /// </summary>
         internal Camera()
@@ -50,7 +44,7 @@ namespace Engine
         /// <param name="gameObj">The object to focus on</param>
         public void SetFocusOn(GameObject gameObj)
         {
-            this.focussedObject = gameObj;
+            this.focusedObject = gameObj;
         }
 
         public void Update(GameTime gameTime)

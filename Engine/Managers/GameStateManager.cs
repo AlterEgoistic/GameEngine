@@ -86,6 +86,14 @@ namespace Engine
             }
         }
 
+        public void FixedUpdate(GameTime gameTime)
+        {
+            if(this.currentGameState != null)
+            {
+                this.currentGameState.FixedUpdate(gameTime);
+            }
+        }
+
         /// <summary>
         /// Resets the current state back to it's original state
         /// </summary>
