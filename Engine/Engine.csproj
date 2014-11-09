@@ -37,8 +37,8 @@
   <ItemGroup>
     <Compile Include="Camera.cs" />
     <Compile Include="GameObjects\AnimatedGameObject.cs" />
-    <Compile Include="RectangleExtensions.cs" />
-    <Compile Include="Circle.cs" />
+    <Compile Include="Collision\RectangleExtensions.cs" />
+    <Compile Include="Collision\Circle.cs" />
     <Compile Include="Interfaces\ICircle.cs" />
     <Compile Include="Interfaces\IRectangle.cs" />
     <Compile Include="Program.cs" />
@@ -108,8 +108,11 @@
   <ItemGroup>
     <Content Include="Icon.ico" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Content\" />
+    <Content Include="Content\defaultSpriteFont.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

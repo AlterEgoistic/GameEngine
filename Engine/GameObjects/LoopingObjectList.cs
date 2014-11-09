@@ -103,12 +103,13 @@ namespace Engine
         /// Looks up a GameObject in the list and children of the lists in the list if appicable
         /// </summary>
         /// <param name="id">The name of the GameObject(List) to look up</param>
+        /// <param name="logErrors">Whether it should display an error when no object with given ID was found</param>
         /// <returns>The GameObject(List) searched for</returns>
         public ILoopGameObject Find(String id, bool logErrors = true)
         {
             if(id == null || id == "")
             {
-                throw new ArgumentException("Invalid argument, id cannot be null or empty");
+                throw new ArgumentException("id cannot be null or empty");
             }
             foreach (ILoopGameObject obj in this)
             {
@@ -133,12 +134,17 @@ namespace Engine
             return null;
         }
 
-
+        /// <summary>
+        /// Finds all the GameObjects that match the specified ID
+        /// </summary>
+        /// <param name="id">The ID (name) of the GameObject(list)(s) to look up</param>
+        /// <param name="logErrors">Whether it should display an error when there was no matching ID found</param>
+        /// <returns>An array that contains all GameObject(lists)s found</returns>
         public ILoopGameObject[] FindAll(String id, bool logErrors = true)
         {
             if(id == null || id == "")
             {
-                throw new ArgumentException("Invalid argument, id cannot be null or empty");
+                throw new ArgumentException("id cannot be null or empty");
             }
             GameObjectList foundGameObjects = new GameObjectList();
 

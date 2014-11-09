@@ -124,7 +124,7 @@ namespace Engine
         }
 
         /// <summary>
-        /// Resets the object to it's starting state
+        /// Resets the object to it's initial state
         /// </summary>
         public virtual void Reset()
         {
@@ -232,8 +232,8 @@ namespace Engine
         }
 
         /// <summary>
-        /// The rectangle around the sprite itself
-        /// Used for culling
+        /// <para>The rectangle around the sprite itself </para>
+        /// <para>Used for culling</para>   
         /// </summary>
         internal Rectangle DrawingBox
         {
